@@ -1,0 +1,21 @@
+//Base
+@import './base/colors.scss';
+@import './base/mixins.scss';
+@import './base/configuration.scss';
+
+//Packages
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/lara-light-indigo/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeflex/primeflex.css';
+
+//Pages
+@import './apps/seekh-lo-app/pages/homepage.scss';
+@import './apps/seekh-lo-app/pages/course-list-page.scss';
+
+//Shared
+@import './apps/seekh-lo-app/shared/header.scss';
+@import './apps/seekh-lo-app/shared/footer.scss';
+
+//Libs
+@import './libs/ui/ui.scss';

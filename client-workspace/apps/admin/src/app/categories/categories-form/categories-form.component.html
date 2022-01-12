@@ -1,0 +1,71 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card
+    [header]="editMode ? 'Edit Category' : 'Add Category'"
+    [subheader]="editMode ? 'Edit a Category' : 'Add a new Category'"
+  >
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <p-button
+              styleClass="p-button-success mr-3"
+              [label]="editMode ? 'Update' : 'Create'"
+              icon="pi pi-plus"
+              (click)="onSubmit()"
+            ></p-button>
+            <p-button
+              styleClass="p-button-danger"
+              label="Cancel"
+              icon="pi pi-times"
+              routerLink="/categories"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid mt-4">
+      <div class="col-12">
+        <form [formGroup]="categoriesForm">
+          <div class="p-fluid p-formgrid grid">
+            <div class="p-field col">
+              <label for="name">Name</label>
+              <input formControlName="name" id="name" type="text" pInputText />
+              <small
+                *ngIf="
+                  categoriesForm.controls['name'].invalid &&
+                  (categoriesForm.controls['name'].dirty ||
+                    categoriesForm.controls['name'].touched)
+                "
+                class="p-error"
+              >
+                Name is Required
+              </small>
+            </div>
+            <div class="p-field col">
+              <label for="icon">Icon</label>
+              <input formControlName="icon" id="icon" type="text" pInputText />
+              <small
+                *ngIf="
+                  categoriesForm.controls['icon'].invalid &&
+                  (categoriesForm.controls['icon'].dirty ||
+                    categoriesForm.controls['icon'].touched)
+                "
+                class="p-error"
+              >
+                Icon is Required
+              </small>
+            </div>
+            <div class="p-field p-col mx-4 mt-2">
+              <label class="color">Color</label>
+              <div class="mt-2">
+                <p-colorPicker formControlName="color"></p-colorPicker>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>
