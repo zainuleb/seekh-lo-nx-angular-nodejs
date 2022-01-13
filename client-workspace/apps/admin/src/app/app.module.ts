@@ -17,9 +17,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Components
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
+import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
+import { CoursesListComponent } from './pages/courses/courses-list/courses-list.component';
+import { CourseFormComponent } from './pages/courses/course-form/course-form.component';
+
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
@@ -29,6 +32,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { DropdownModule } from 'primeng/dropdown';
 
 //Specifing Routes
 const routes: Routes = [
@@ -39,7 +43,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'categories', component: CategoriesListComponent },
       { path: 'categories/form', component: CategoriesFormComponent },
-      { path: 'categories/form/:id', component: CategoriesFormComponent },
+      { path: 'courses', component: CoursesListComponent },
+      { path: 'courses/form', component: CourseFormComponent },
     ],
   },
 ];
@@ -53,6 +58,7 @@ const UX_MODULE = [
   ToastModule,
   ConfirmDialogModule,
   ColorPickerModule,
+  DropdownModule,
 ];
 
 @NgModule({
@@ -64,6 +70,8 @@ const UX_MODULE = [
     SidebarComponent,
     CategoriesListComponent,
     CategoriesFormComponent,
+    CoursesListComponent,
+    CourseFormComponent,
   ],
   imports: [
     BrowserModule,

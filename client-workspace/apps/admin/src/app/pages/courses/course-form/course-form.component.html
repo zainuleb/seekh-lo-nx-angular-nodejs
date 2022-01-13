@@ -1,0 +1,207 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card
+    [header]="editMode ? 'Edit Course' : 'Add Course'"
+    [subheader]="editMode ? 'Edit a Course' : 'Add a new Course'"
+  >
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <p-button
+              styleClass="p-button-success mr-3"
+              [label]="editMode ? 'Update' : 'Create'"
+              icon="pi pi-plus"
+              (click)="onSubmit()"
+            ></p-button>
+            <p-button
+              styleClass="p-button-danger"
+              label="Cancel"
+              icon="pi pi-times"
+              routerLink="/courses"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid mt-4">
+      <div class="col-12">
+        <form [formGroup]="courseForm">
+          <div class="p-fluid p-formgrid grid">
+            <div class="p-field col-4">
+              <label for="name">Title</label>
+              <input
+                formControlName="title"
+                id="title"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  courseForm.controls['title'].invalid &&
+                  (courseForm.controls['title'].dirty ||
+                    courseForm.controls['title'].touched)
+                "
+                class="p-error"
+              >
+                Title is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="category">Category</label>
+
+              <p-dropdown
+                [options]="categories"
+                formControlName="category"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Select a Category"
+              >
+                <ng-template pTemplate="selectedItem">
+                  <div
+                    class="country-item country-item-value"
+                    *ngIf="courseForm.controls['category'].value"
+                  >
+                    <div>{{ courseForm.controls['category'].value.name }}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-country pTemplate="item">
+                  <div>
+                    <div>{{ country.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+
+              <small
+                *ngIf="
+                  courseForm.controls['category'].invalid &&
+                  courseForm.controls['category'].touched
+                "
+                class="p-error"
+              >
+                Category is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="language">Language</label>
+
+              <p-dropdown
+                [options]="categories"
+                formControlName="language"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                placeholder="Select a Language"
+              >
+                <ng-template pTemplate="selectedItem">
+                  <div
+                    class="country-item country-item-value"
+                    *ngIf="courseForm.controls['language'].value"
+                  >
+                    <div>{{ courseForm.controls['language'].value.name }}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-country pTemplate="item">
+                  <div>
+                    <div>{{ country.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+
+              <small
+                *ngIf="
+                  courseForm.controls['language'].invalid &&
+                  courseForm.controls['language'].touched
+                "
+                class="p-error"
+              >
+                Language is Required
+              </small>
+            </div>
+
+            <div class="p-field col-12">
+              <label for="description">Description</label>
+              <input
+                formControlName="description"
+                id="description"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  courseForm.controls['description'].invalid &&
+                  (courseForm.controls['description'].dirty ||
+                    courseForm.controls['description'].touched)
+                "
+                class="p-error"
+              >
+                Description is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="price">Price</label>
+              <input
+                formControlName="price"
+                id="price"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  courseForm.controls['price'].invalid &&
+                  (courseForm.controls['price'].dirty ||
+                    courseForm.controls['price'].touched)
+                "
+                class="p-error"
+              >
+                Price is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="rating">rating</label>
+              <input
+                formControlName="rating"
+                id="rating"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  courseForm.controls['rating'].invalid &&
+                  (courseForm.controls['rating'].dirty ||
+                    courseForm.controls['rating'].touched)
+                "
+                class="p-error"
+              >
+                Rating is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="isFeatured">isFeatured</label>
+              <input
+                formControlName="isFeatured"
+                id="isFeatured"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  courseForm.controls['isFeatured'].invalid &&
+                  (courseForm.controls['isFeatured'].dirty ||
+                    courseForm.controls['isFeatured'].touched)
+                "
+                class="p-error"
+              >
+                Featured Status is Required
+              </small>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>

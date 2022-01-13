@@ -1,0 +1,100 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card header="Courses" subheader="List of All Courses">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button
+              styleClass="p-button-success"
+              label="Add New Courses"
+              icon="pi pi-plus"
+              routerLink="form"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="p-grid mt-4">
+      <div class="p-col-12">
+        <p-table
+          #dt
+          [value]="courses"
+          dataKey="id"
+          styleClass="p-datatable-customers"
+          [rowHover]="true"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10, 5, 15]"
+          [paginator]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [filterDelay]="0"
+          [globalFilterFields]="[
+            'name',
+            'country.name',
+            'representative.name',
+            'status'
+          ]"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Id</th>
+              <th pSortableColumn="title">
+                <div class="flex justify-content-between p-ai-center">
+                  Title
+                  <div>
+                    <p-sortIcon field="title"></p-sortIcon>
+                    <p-columnFilter
+                      type="text"
+                      field="title"
+                      display="menu"
+                      class="p-ml-auto"
+                    ></p-columnFilter>
+                  </div>
+                </div>
+              </th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Language</th>
+              <th>Rating</th>
+              <th>Feature Status</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-course>
+            <tr>
+              <td>{{ course._id | slice: 5:7 }}</td>
+              <td>{{ course.title }}</td>
+              <td>{{ course.description }}</td>
+              <td>{{ course.category }}</td>
+              <td>{{ course.price }}</td>
+              <td>{{ course.language }}</td>
+              <td>{{ course.rating }}</td>
+              <td>
+                <button
+                  (click)="deleteCourse(course._id)"
+                  pButton
+                  type="button"
+                  class="p-button-outlined p-button-danger mr-3"
+                  icon="pi pi-trash"
+                ></button>
+                <button
+                  (click)="updateCourseRedirect(course._id)"
+                  pButton
+                  type="button"
+                  class="p-button-outlined p-button-help"
+                  icon="pi pi-pencil"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>
