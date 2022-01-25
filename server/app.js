@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
@@ -12,11 +13,13 @@ const app = express();
 const cors = require('cors');
 require('dotenv/config');
 app.use(cors());
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 app.options('*', cors());
 
 //middleware
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+
 /* app.use(authJWT()); */
 app.use(errorHandler);
 //Routes Import

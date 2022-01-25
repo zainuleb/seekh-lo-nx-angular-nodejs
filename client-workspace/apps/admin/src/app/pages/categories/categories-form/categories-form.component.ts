@@ -45,7 +45,7 @@ export class CategoriesFormComponent implements OnInit {
     }
 
     const category: Category = {
-      id: this.currentCategoryId,
+      _id: this.currentCategoryId,
       name: this.categoriesForm.controls['name'].value,
       icon: this.categoriesForm.controls['icon'].value,
       color: this.categoriesForm.controls['color'].value,

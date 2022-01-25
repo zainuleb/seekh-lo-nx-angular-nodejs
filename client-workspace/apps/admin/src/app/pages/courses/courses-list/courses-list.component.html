@@ -53,22 +53,42 @@
                   </div>
                 </div>
               </th>
-              <th>Description</th>
+              <th>Image</th>
               <th>Category</th>
-              <th>Price</th>
+              <th pSortableColumn="price">
+                <div class="flex justify-content-between p-ai-center">
+                  Price
+                  <div>
+                    <p-sortIcon field="price"></p-sortIcon>
+                    <p-columnFilter
+                      type="text"
+                      field="price"
+                      display="menu"
+                      class="p-ml-auto"
+                    ></p-columnFilter>
+                  </div>
+                </div>
+              </th>
               <th>Language</th>
               <th>Rating</th>
-              <th>Feature Status</th>
+              <th></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-course>
             <tr>
               <td>{{ course._id | slice: 5:7 }}</td>
               <td>{{ course.title }}</td>
-              <td>{{ course.description }}</td>
-              <td>{{ course.category }}</td>
-              <td>{{ course.price }}</td>
-              <td>{{ course.language }}</td>
+              <td>
+                <img
+                  [src]="course.image"
+                  alt="{{ course.title }}"
+                  width="110px"
+                  height="110px"
+                />
+              </td>
+              <td>{{ course.category.name }}</td>
+              <td>{{ course.price | currency: 'PKR':'Rs ':'1.0-2' }}</td>
+              <td>{{ course.language | titlecase }}</td>
               <td>{{ course.rating }}</td>
               <td>
                 <button

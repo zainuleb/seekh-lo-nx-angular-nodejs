@@ -20,12 +20,12 @@ export class CourseService {
     return this.http.get<Course>(`${this.apiURLCourses}/${courseId}`);
   }
 
-  postCourse(course: Course): Observable<Course> {
+  postCourse(course: FormData): Observable<Course> {
     return this.http.post<Course>(this.apiURLCourses, course);
   }
 
-  putCourse(course: Course): Observable<Course> {
-    return this.http.put<Course>(`${this.apiURLCourses}/${course.id}`, course);
+  putCourse(course: FormData, courseId: string): Observable<Course> {
+    return this.http.put<Course>(`${this.apiURLCourses}/${courseId}`, course);
   }
 
   deleteCourse(courseId: string): Observable<object> {

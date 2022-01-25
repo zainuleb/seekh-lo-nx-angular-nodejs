@@ -26,7 +26,7 @@ export class CategoriesService {
 
   putCategory(category: Category): Observable<Category> {
     return this.http.put<Category>(
-      `${this.apiURLCategories}/${category.id}`,
+      `${this.apiURLCategories}/${category._id}`,
       category
     );
   }

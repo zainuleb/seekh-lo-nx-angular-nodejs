@@ -16,10 +16,16 @@
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictNullChecks": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "lib": [
+      "es2019",
+      "dom",
+      "dom.iterable" // <- there you are
+    ]
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

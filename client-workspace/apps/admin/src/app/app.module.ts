@@ -33,6 +33,10 @@ import { ConfirmationService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { EditorModule } from 'primeng/editor';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 //Specifing Routes
 const routes: Routes = [
@@ -43,8 +47,10 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'categories', component: CategoriesListComponent },
       { path: 'categories/form', component: CategoriesFormComponent },
+      { path: 'categories/form/:id', component: CategoriesFormComponent },
       { path: 'courses', component: CoursesListComponent },
       { path: 'courses/form', component: CourseFormComponent },
+      { path: 'courses/form/:id', component: CourseFormComponent },
     ],
   },
 ];
@@ -59,6 +65,10 @@ const UX_MODULE = [
   ConfirmDialogModule,
   ColorPickerModule,
   DropdownModule,
+  InputNumberModule,
+  InputTextareaModule,
+  EditorModule,
+  InputSwitchModule,
 ];
 
 @NgModule({

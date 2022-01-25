@@ -13,17 +13,21 @@ const courseSchema = mongoose.Schema({
     trim: true,
     maxlength: [300, 'Description cannot exceed 300 characters'],
   },
-  /*   richDescription: {
+  richDescription: {
     type: String,
     required: [true, 'Please Enter Course Rich Description'],
     trim: true,
     maxlength: [1000, 'Rich Description cannot exceed 1000 characters'],
-  }, */
-  /*   images: [
+  },
+  image: {
+    type: String,
+    default: '',
+  },
+  images: [
     {
       type: String,
     },
-  ], */
+  ],
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
@@ -50,7 +54,7 @@ const courseSchema = mongoose.Schema({
     default: 0,
   },
    */
-  deteCreated: {
+  createdAt: {
     type: Date,
     default: Date.now,
   },
