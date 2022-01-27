@@ -37,6 +37,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { EditorModule } from 'primeng/editor';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { CurrencyConvertPipe } from './currency-convert.pipe';
 
 //Specifing Routes
 const routes: Routes = [
@@ -82,6 +83,7 @@ const UX_MODULE = [
     CategoriesFormComponent,
     CoursesListComponent,
     CourseFormComponent,
+    CurrencyConvertPipe,
   ],
   imports: [
     BrowserModule,

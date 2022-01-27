@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService, Course } from '@client-workspace/courses';
-
+import { CurrencyService, CurrencyAPI } from '@client-workspace/courses';
 import { Router } from '@angular/router';
+
 import {
   ConfirmationService,
   ConfirmEventType,
@@ -15,22 +16,44 @@ import {
 })
 export class CoursesListComponent implements OnInit {
   courses: Course[] = [];
+  currencyData: CurrencyAPI;
+  currencyId: 'PKR';
+  currentCurrency: { code: string; rate: number };
+  currencyOpt = ['USD', 'GBP', 'PKR'];
 
   constructor(
     private courseService: CourseService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private currencyService: CurrencyService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this._getCourses();
+    this.getCourses();
+    this.setCurrencyData();
+    this.currentCurrency = { code: 'PKR', rate: 1 };
   }
 
-  private _getCourses() {
+  private setCurrencyData() {
+    this.currencyService.currencyAPI().subscribe((result) => {
+      this.currencyData = result;
+      this.currencyOpt = Object.keys(this.currencyData.rates);
+    });
+  }
+
+  getCurrency() {
+    const entries = Object.entries(this.currencyData.rates);
+    const value = entries.find((key) => key[0] === this.currencyId);
+    this.currentCurrency = {
+      code: value[0],
+      rate: parseFloat(JSON.stringify(value[1])),
+    };
+  }
+
+  private getCourses() {
     this.courseService.getCourses().subscribe((course) => {
       this.courses = course;
-      console.log(course);
     });
   }
 
@@ -52,7 +75,7 @@ export class CoursesListComponent implements OnInit {
 
         this.courseService.deleteCourse(courseId).subscribe(
           (res) => {
-            this._getCourses();
+            this.getCourses();
           },
           (err) => {
             this.messageService.add({

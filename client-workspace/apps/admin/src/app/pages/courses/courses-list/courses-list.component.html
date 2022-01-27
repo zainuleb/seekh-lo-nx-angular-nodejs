@@ -12,6 +12,13 @@
               routerLink="form"
             ></p-button>
           </div>
+          <div class="p-toolbar-group-right">
+            <p-dropdown
+              [options]="currencyOpt"
+              [(ngModel)]="currencyId"
+              (onChange)="getCurrency()"
+            ></p-dropdown>
+          </div>
         </p-toolbar>
       </div>
     </div>
@@ -87,7 +94,13 @@
                 />
               </td>
               <td>{{ course.category.name }}</td>
-              <td>{{ course.price | currency: 'PKR':'Rs ':'1.0-2' }}</td>
+              <td>
+                {{
+                  course.price
+                    | currencyConvert: this.currentCurrency['rate']
+                    | currency: this.currentCurrency['code']
+                }}
+              </td>
               <td>{{ course.language | titlecase }}</td>
               <td>{{ course.rating }}</td>
               <td>

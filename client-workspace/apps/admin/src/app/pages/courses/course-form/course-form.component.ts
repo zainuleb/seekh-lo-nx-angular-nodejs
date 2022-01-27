@@ -157,10 +157,6 @@ export class CourseFormComponent implements OnInit {
   }
 
   private courseEdit(formData: FormData) {
-    for (const pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
-    }
-
     this.courseService.putCourse(formData, this.currentCourseId).subscribe(
       (res: Course) => {
         this.messageService.add({
@@ -168,7 +164,6 @@ export class CourseFormComponent implements OnInit {
           summary: 'Course Updated Successfully',
           detail: `Name:${res.title} has been Updated`,
         });
-        console.log(res);
 
         timer(2000)
           .toPromise()
@@ -184,22 +179,3 @@ export class CourseFormComponent implements OnInit {
     );
   }
 }
-
-/*
-    for (const pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
-    }
-    
-    const course: Course = {
-      id: this.currentCourseId,
-      title: this.courseForm.controls['title'].value,
-      description: this.courseForm.controls['description'].value,
-      richDescription: this.courseForm.controls['richDescription'].value,
-      image: this.courseForm.controls['image'].value,
-      images: this.courseForm.controls['images'].value,
-      category: this.courseForm.controls['category'].value,
-      price: this.courseForm.controls['price'].value,
-      language: this.courseForm.controls['language'].value,
-      rating: this.courseForm.controls['rating'].value,
-      isFeatured: this.courseForm.controls['isFeatured'].value,
-    }; */

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiURL: 'http://localhost:3000/api/v1/',
+  currencyURL: 'https://api.exchangerate-api.com/v4/latest/PKR',
 };
 
 /*
