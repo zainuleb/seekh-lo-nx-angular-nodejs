@@ -38,6 +38,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { EditorModule } from 'primeng/editor';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { CurrencyConvertPipe } from './currency-convert.pipe';
+import { UserListComponent } from './pages/user/user-list/user-list.component';
+import { UserFormComponent } from './pages/user/user-form/user-form.component';
 
 //Specifing Routes
 const routes: Routes = [
@@ -52,6 +54,9 @@ const routes: Routes = [
       { path: 'courses', component: CoursesListComponent },
       { path: 'courses/form', component: CourseFormComponent },
       { path: 'courses/form/:id', component: CourseFormComponent },
+      { path: 'users', component: UserListComponent },
+      { path: 'users/form', component: UserFormComponent },
+      { path: 'users/form/:id', component: UserFormComponent },
     ],
   },
 ];
@@ -84,6 +89,8 @@ const UX_MODULE = [
     CoursesListComponent,
     CourseFormComponent,
     CurrencyConvertPipe,
+    UserListComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,

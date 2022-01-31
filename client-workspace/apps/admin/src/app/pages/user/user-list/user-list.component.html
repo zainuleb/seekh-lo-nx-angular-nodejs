@@ -1,23 +1,16 @@
 <p-toast></p-toast>
 <div class="admin-page">
-  <p-card header="Courses" subheader="List of All Courses">
+  <p-card header="Users" subheader="List of All Users">
     <div class="p-grid">
       <div class="p-col-12">
         <p-toolbar>
           <div class="p-toolbar-group-left">
             <p-button
               styleClass="p-button-success"
-              label="Add New Courses"
+              label="Add New Users"
               icon="pi pi-plus"
               routerLink="form"
             ></p-button>
-          </div>
-          <div class="p-toolbar-group-right">
-            <p-dropdown
-              [options]="currencyOpt"
-              [(ngModel)]="currencyId"
-              (onChange)="getCurrency()"
-            ></p-dropdown>
           </div>
         </p-toolbar>
       </div>
@@ -26,7 +19,7 @@
       <div class="p-col-12">
         <p-table
           #dt
-          [value]="courses"
+          [value]="users"
           dataKey="id"
           styleClass="p-datatable-customers"
           [rowHover]="true"
@@ -48,7 +41,7 @@
               <th>Id</th>
               <th pSortableColumn="title">
                 <div class="flex justify-content-between p-ai-center">
-                  Title
+                  Name
                   <div>
                     <p-sortIcon field="title"></p-sortIcon>
                     <p-columnFilter
@@ -60,59 +53,60 @@
                   </div>
                 </div>
               </th>
-              <th>Image</th>
-              <th>Category</th>
-              <th pSortableColumn="price">
+              <th>Email</th>
+              <th>Contact</th>
+              <th pSortableColumn="role">
                 <div class="flex justify-content-between p-ai-center">
-                  Price
+                  Role
                   <div>
-                    <p-sortIcon field="price"></p-sortIcon>
+                    <p-sortIcon field="role"></p-sortIcon>
                     <p-columnFilter
                       type="text"
-                      field="price"
+                      field="role"
                       display="menu"
                       class="p-ml-auto"
                     ></p-columnFilter>
                   </div>
                 </div>
               </th>
-              <th>Language</th>
-              <th>Rating</th>
+              <th>Address</th>
+              <th>Zip</th>
               <th></th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-course>
+          <ng-template pTemplate="body" let-user>
             <tr>
-              <td>{{ course._id | slice: 5:7 }}</td>
-              <td>{{ course.title | uppercase }}</td>
               <td>
-                <img
-                  [src]="course.image"
-                  alt="{{ course.title }}"
-                  width="110px"
-                  height="110px"
-                />
+                {{ user.id | slice: 5:10 }}
               </td>
-              <td>{{ course.category.name }}</td>
               <td>
-                {{
-                  course.price
-                    | currencyConvert: this.currentCurrency['rate']
-                    | currency: this.currentCurrency['code']
-                }}
+                {{ user.name }}
               </td>
-              <td>{{ course.language | titlecase }}</td>
-              <td>{{ course.rating }}</td>
+              <td>
+                {{ user.email }}
+              </td>
+              <td>
+                {{ user.contact }}
+              </td>
+              <td>
+                {{ user.role | titlecase }}
+              </td>
+              <td>
+                {{ user.country }}
+              </td>
+              <td>
+                {{ user.zip }}
+              </td>
               <td>
                 <button
-                  (click)="deleteCourse(course._id)"
+                  (click)="deleteUser(user._id)"
                   pButton
                   type="button"
                   class="p-button-outlined p-button-danger mr-3"
                   icon="pi pi-trash"
                 ></button>
                 <button
-                  (click)="updateCourseRedirect(course._id)"
+                  (click)="updateUserRedirect(user._id)"
                   pButton
                   type="button"
                   class="p-button-outlined p-button-help"
