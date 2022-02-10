@@ -18,6 +18,9 @@
     "paths": {
       "@client-workspace/courses": ["libs/courses/src/index.ts"],
       "@client-workspace/enrollment": ["libs/enrollment/src/index.ts"],
+      "@client-workspace/location-dropdown": [
+        "libs/location-dropdown/src/index.ts"
+      ],
       "@client-workspace/ui": ["libs/ui/src/index.ts"],
       "@client-workspace/users": ["libs/users/src/index.ts"],
       "@env/*": ["environments/*"]

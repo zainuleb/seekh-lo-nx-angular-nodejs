@@ -102,7 +102,6 @@ export class CategoriesFormComponent implements OnInit {
       if (params['id']) {
         this.editMode = true;
         this.currentCategoryId = params['id'];
-
         this.categoriesService
           .getCategory(this.currentCategoryId)
           .subscribe((cat) => {

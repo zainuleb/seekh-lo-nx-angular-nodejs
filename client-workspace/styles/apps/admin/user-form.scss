@@ -1,0 +1,29 @@
+.contact-form {
+  width: 100%;
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 400;
+  background: #ffffff;
+  padding: 0.75rem 0.75rem;
+  border: 1px solid #ced4da;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  border-radius: 6px;
+  overflow: visible;
+
+  .iti__flag.iti__kg {
+    height: 15px;
+  }
+
+  input {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  &:hover {
+    border-color: #6366f1;
+  }
+}
+
+.iti {
+  width: 100%;
+}

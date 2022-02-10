@@ -7,6 +7,7 @@ export class User {
   street?: string;
   house?: string;
   city?: string;
+  state?: string;
   country?: string;
   zip?: string;
   role?: string;

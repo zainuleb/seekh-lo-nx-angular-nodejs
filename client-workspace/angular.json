@@ -18,14 +18,12 @@
             "tsConfig": "apps/admin/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
-            "styles": [
-              "apps/admin/src/styles.scss",
-              "./node_modules/primeng/resources/primeng.css",
-              "./node_modules/primeflex/primeflex.css",
-              "node_modules/quill/dist/quill.core.css",
-              "node_modules/quill/dist/quill.snow.css"
-            ],
-            "scripts": ["node_modules/quill/dist/quill.js"]
+            "styles": ["apps/admin/src/styles.scss"],
+            "scripts": [
+              "apps/admin/src/assets/theme/md-dark-indigo/theme.css",
+              "node_modules/quill/dist/quill.js",
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -172,6 +170,32 @@
             "lintFilePatterns": [
               "libs/enrollment/src/**/*.ts",
               "libs/enrollment/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "location-dropdown": {
+      "projectType": "library",
+      "root": "libs/location-dropdown",
+      "sourceRoot": "libs/location-dropdown/src",
+      "prefix": "client-workspace",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/location-dropdown"],
+          "options": {
+            "jestConfig": "libs/location-dropdown/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/location-dropdown/src/**/*.ts",
+              "libs/location-dropdown/src/**/*.html"
             ]
           }
         }

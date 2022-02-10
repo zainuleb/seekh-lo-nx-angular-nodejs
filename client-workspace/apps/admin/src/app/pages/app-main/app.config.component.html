@@ -1,0 +1,43 @@
+<div
+  id="layout-config"
+  class="layout-config"
+  [ngClass]="{ 'layout-config-active': appMain.configActive }"
+  (click)="appMain.onConfigClick($event)"
+>
+  <a
+    style="cursor: pointer"
+    id="layout-config-button"
+    class="layout-config-button"
+    (click)="onConfigButtonClick($event)"
+  >
+    <i class="pi pi-cog"></i>
+  </a>
+  <button
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-times"
+    class="p-button-rounded p-button-danger p-button-text layout-config-close"
+    (click)="onConfigButtonClick($event)"
+  ></button>
+  <div class="layout-config-content">
+    <div class="grid free-themes">
+      <div class="col-3 text-center">
+        <button class="p-link" (click)="changeTheme('md-light-indigo', false)">
+          <img
+            src="assets/layout/images/themes/md-light-indigo.svg"
+            alt="Material Light Indigo"
+          />
+        </button>
+      </div>
+      <div class="col-3 text-center">
+        <button class="p-link" (click)="changeTheme('md-dark-indigo', true)">
+          <img
+            src="assets/layout/images/themes/md-dark-indigo.svg"
+            alt="Material Dark Indigo"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -26,12 +26,14 @@ app.use(errorHandler);
 const coursesRoutes = require('./routes/courses');
 const usersRoutes = require('./routes/users');
 const categoriesRoutes = require('./routes/categories.js');
+const countriesRoutes = require('./routes/locations.js');
 
 const api = process.env.API_URL;
 
 app.use(`${api}/courses`, coursesRoutes);
 app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/categories`, categoriesRoutes);
+app.use(`${api}/countries`, countriesRoutes);
 
 //Database
 mongoose

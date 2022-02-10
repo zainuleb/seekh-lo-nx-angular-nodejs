@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema({
   street: { type: String, default: '' },
   house: { type: String, default: '' },
   city: { type: String, default: '' },
+  state: { type: String, default: '' },
   country: { type: String, default: '' },
   zip: { type: String, default: '' },
   role: {

@@ -1,0 +1,278 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card
+    [header]="editMode ? 'Edit User' : 'Add User'"
+    [subheader]="editMode ? 'Edit a User' : 'Add a new User'"
+  >
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <p-button
+              styleClass="p-button-success mr-3"
+              [label]="editMode ? 'Update' : 'Create'"
+              icon="pi pi-plus"
+              (click)="onSubmit()"
+            ></p-button>
+            <p-button
+              styleClass="p-button-danger"
+              label="Cancel"
+              icon="pi pi-times"
+              routerLink="/users"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid mt-4">
+      <div class="col-12">
+        <form [formGroup]="userForm">
+          <div class="p-fluid p-formgrid grid">
+            <div class="p-field col-4">
+              <label for="name">Name</label>
+              <input formControlName="name" id="name" type="text" pInputText />
+              <small
+                *ngIf="
+                  userForm.controls['name'].invalid &&
+                  (userForm.controls['name'].dirty ||
+                    userForm.controls['name'].touched)
+                "
+                class="p-error"
+              >
+                Name is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="email">Email</label>
+              <input
+                formControlName="email"
+                id="email"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  userForm.controls['email'].invalid &&
+                  (userForm.controls['email'].dirty ||
+                    userForm.controls['email'].touched)
+                "
+                class="p-error"
+              >
+                Email is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="passwordHash">Password</label>
+              <input
+                formControlName="passwordHash"
+                id="passwordHash"
+                type="password"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  userForm.controls['passwordHash'].invalid &&
+                  (userForm.controls['passwordHash'].dirty ||
+                    userForm.controls['passwordHash'].touched)
+                "
+                class="p-error"
+              >
+                passwordHash is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="contact">Contact</label>
+              <div>
+                <ngx-intl-tel-input
+                  style="width: 100%"
+                  [cssClass]="'contact-form'"
+                  [preferredCountries]="preferredCountries"
+                  [enableAutoCountrySelect]="true"
+                  [enablePlaceholder]="false"
+                  [searchCountryFlag]="true"
+                  [searchCountryField]="[
+                    SearchCountryField.Iso2,
+                    SearchCountryField.Name
+                  ]"
+                  [selectFirstCountry]="false"
+                  [selectedCountryISO]="CountryISO.Pakistan"
+                  maxLength="15"
+                  [phoneValidation]="true"
+                  [separateDialCode]="separateDialCode"
+                  [numberFormat]="PhoneNumberFormat.National"
+                  name="phone"
+                  formControlName="contact"
+                >
+                </ngx-intl-tel-input>
+              </div>
+
+              <small
+                *ngIf="
+                  userForm.controls['contact'].invalid &&
+                  userForm.controls['contact'].dirty &&
+                  userForm.controls['contact'].touched
+                "
+                class="p-error"
+              >
+                Contact is Required
+              </small>
+            </div>
+            <div class="p-field col-12"></div>
+            <div class="p-field col-4">
+              <label for="street">Street</label>
+              <input
+                formControlName="street"
+                id="street"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  userForm.controls['street'].invalid &&
+                  (userForm.controls['street'].dirty ||
+                    userForm.controls['street'].touched)
+                "
+                class="p-error"
+              >
+                Street is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="house">House</label>
+              <input
+                formControlName="house"
+                id="house"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  userForm.controls['house'].invalid &&
+                  (userForm.controls['house'].dirty ||
+                    userForm.controls['house'].touched)
+                "
+                class="p-error"
+              >
+                House is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="country">Country</label>
+              <p-dropdown
+                [options]="countries"
+                formControlName="country"
+                placeholder="Select a Country"
+                optionLabel="name"
+                [showClear]="true"
+                (onChange)="getStates()"
+              ></p-dropdown>
+
+              <small
+                *ngIf="
+                  userForm.controls['country'].invalid &&
+                  (userForm.controls['country'].dirty ||
+                    userForm.controls['country'].touched)
+                "
+                class="p-error"
+              >
+                Country is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="state">State</label>
+              <p-dropdown
+                [options]="states"
+                formControlName="state"
+                placeholder="Select a State"
+                optionLabel="name"
+                [showClear]="true"
+                (onChange)="getCities()"
+              ></p-dropdown>
+              <small
+                *ngIf="
+                  userForm.controls['state'].invalid &&
+                  (userForm.controls['state'].dirty ||
+                    userForm.controls['state'].touched)
+                "
+                class="p-error"
+              >
+                State is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="city">City</label>
+              <p-dropdown
+                [options]="cities"
+                formControlName="city"
+                placeholder="Select a city"
+                optionLabel="name"
+                [showClear]="true"
+              ></p-dropdown>
+              <small
+                *ngIf="
+                  userForm.controls['city'].invalid &&
+                  (userForm.controls['city'].dirty ||
+                    userForm.controls['city'].touched)
+                "
+                class="p-error"
+              >
+                city is Required
+              </small>
+            </div>
+            <div class="p-field col-4">
+              <label for="zip">zip</label>
+              <input formControlName="zip" id="zip" type="text" pInputText />
+              <small
+                *ngIf="
+                  userForm.controls['zip'].invalid &&
+                  (userForm.controls['zip'].dirty ||
+                    userForm.controls['zip'].touched)
+                "
+                class="p-error"
+              >
+                zip is Required
+              </small>
+            </div>
+          </div>
+        </form>
+        <!--         <form action="/uploadfile" enctype="multipart/form-data" method="POST">
+          <div class="p-filed p-col-12">
+            <div>
+              <label for="image">Main Image</label>
+            </div>
+            <input
+              type="file"
+              class="p-inputtext"
+              accept="image/*"
+              (change)="onImageUpload($event)"
+            />
+            <div *ngIf="imageDisplay" class="mt-3 ml-0">
+              <img
+                style="
+                  max-width: 200px;
+                  max-height: 200px;
+                  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+                    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+                "
+                [src]="imageDisplay"
+              />
+              <div>
+                <p-button
+                  label="Upload"
+                  icon="pi pi-upload"
+                  iconPos="right"
+                  [style]="{
+                    width: '17%',
+                    color: 'white',
+                    backgroundColor: '#16A34B'
+                  }"
+                ></p-button>
+              </div>
+            </div>
+          </div>
+        </form> -->
+      </div>
+    </div>
+  </p-card>
+</div>

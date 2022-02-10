@@ -14,6 +14,8 @@ import {
 })
 export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
+  loading = true;
+
   constructor(
     private categoriesService: CategoriesService,
     private messageService: MessageService,
@@ -22,17 +24,18 @@ export class CategoriesListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._getCategories();
+    this.getCategories();
   }
 
-  private _getCategories() {
+  private getCategories() {
     this.categoriesService.getCategories().subscribe((cats) => {
       this.categories = cats;
+      this.loading = false;
     });
   }
 
   updateCategoryRedirect(categoryId: string) {
-    this.router.navigateByUrl(`categories/form/${categoryId}`);
+    this.router.navigate([`categories/form/${categoryId}`]);
   }
 
   deleteCategory(categoryId: string) {
@@ -49,7 +52,7 @@ export class CategoriesListComponent implements OnInit {
 
         this.categoriesService.deleteCategory(categoryId).subscribe(
           (res) => {
-            this._getCategories();
+            this.getCategories();
           },
           (err) => {
             this.messageService.add({
