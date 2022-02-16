@@ -21,7 +21,7 @@ export class UserService {
   }
 
   postUser(user: FormData): Observable<User> {
-    return this.http.post<User>(this.apiURLUsers, User);
+    return this.http.post<User>(this.apiURLUsers, user);
   }
 
   putUser(user: FormData, userId: string): Observable<User> {

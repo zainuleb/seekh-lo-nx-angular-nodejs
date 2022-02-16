@@ -1,9 +1,37 @@
 const { User } = require('../models/user.js');
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
+
+const multer = require('multer');
+
+/* Image File Section */
+const FILE_TYPE_MAP = {
+  'image/png': 'png',
+  'image/jpeg': 'jpeg',
+  'image/jpg': 'jpg',
+};
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const isValid = FILE_TYPE_MAP[file.mimetype];
+    let uploadError = new Error('invalid image type');
+
+    if (isValid) {
+      uploadError = null;
+    }
+    cb(uploadError, 'public/uploads');
+  },
+  filename: function (req, file, cb) {
+    const fileName = file.originalname.split(' ').join('-');
+    const extension = FILE_TYPE_MAP[file.mimetype];
+    cb(null, `${fileName}-${Date.now()}.${extension}`);
+  },
+});
+
+const uploadOptions = multer({ storage: storage });
+/* Image File Section End */
 
 //Get All Users
 router.get(`/`, async (req, res) => {
@@ -15,13 +43,18 @@ router.get(`/`, async (req, res) => {
   res.send(userList);
 });
 
-router.post(`/`, async (req, res) => {
+router.post(`/`, uploadOptions.single('profilePicture'), async (req, res) => {
+  const file = req.file;
+  const fileName = file.filename;
+  const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+
   try {
     let user = new User({
       name: req.body.name,
       email: req.body.email,
       passwordHash: bcrypt.hashSync(req.body.passwordHash, 10),
       contact: req.body.contact,
+      profilePicture: `${basePath}${fileName}`,
       isAdmin: req.body.isAdmin,
       street: req.body.street,
       house: req.body.house,

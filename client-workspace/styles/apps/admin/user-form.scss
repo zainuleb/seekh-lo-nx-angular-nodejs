@@ -24,6 +24,45 @@
   }
 }
 
-.iti {
-  width: 100%;
+.user-form-image {
+  .p-component {
+    color: --green-500;
+  }
+  .p-fileupload {
+    .p-fileupload-buttonbar {
+      border: none;
+      .p-button {
+        background-color: #136a8a;
+        .p-button-label {
+          color: white;
+        }
+      }
+    }
+    .p-fileupload-content {
+      border: none;
+      padding: 1rem;
+      p-progressbar {
+        display: none;
+      }
+      .p-fileupload-row {
+        align-items: flex-start;
+        padding: none;
+        gap: 10px;
+        .p-fileupload-filename {
+          display: none;
+        }
+        div {
+          padding: 0px;
+        }
+        div:nth-child(3) {
+          display: none;
+        }
+        .p-button {
+          background-color: #136a8a;
+          width: 40%;
+          max-height: 35px;
+        }
+      }
+    }
+  }
 }

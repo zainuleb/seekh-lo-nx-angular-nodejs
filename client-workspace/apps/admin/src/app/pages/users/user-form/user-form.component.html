@@ -78,16 +78,34 @@
                 "
                 class="p-error"
               >
-                passwordHash is Required
+                Password is Required
               </small>
             </div>
             <div class="p-field col-4">
               <label for="contact">Contact</label>
               <div>
                 <ngx-intl-tel-input
+                  [cssClass]="'contact-form'"
+                  [enableAutoCountrySelect]="true"
+                  [searchCountryFlag]="true"
+                  separateDialCode="true"
+                  [searchCountryField]="[
+                    SearchCountryField.Iso2,
+                    SearchCountryField.Name
+                  ]"
+                  [selectFirstCountry]="false"
+                  [selectedCountryISO]="CountryISO.Pakistan"
+                  [maxLength]="15"
+                  [phoneValidation]="true"
+                  [separateDialCode]="separateDialCode"
+                  [numberFormat]="PhoneNumberFormat.National"
+                  inputId="contact"
+                  formControlName="contact"
+                >
+                </ngx-intl-tel-input>
+                <!--                 <ngx-intl-tel-input
                   style="width: 100%"
                   [cssClass]="'contact-form'"
-                  [preferredCountries]="preferredCountries"
                   [enableAutoCountrySelect]="true"
                   [enablePlaceholder]="false"
                   [searchCountryFlag]="true"
@@ -98,27 +116,47 @@
                   [selectFirstCountry]="false"
                   [selectedCountryISO]="CountryISO.Pakistan"
                   maxLength="15"
-                  [phoneValidation]="true"
                   [separateDialCode]="separateDialCode"
                   [numberFormat]="PhoneNumberFormat.National"
-                  name="phone"
+                  name="contact"
                   formControlName="contact"
                 >
-                </ngx-intl-tel-input>
+                </ngx-intl-tel-input> -->
               </div>
 
               <small
                 *ngIf="
                   userForm.controls['contact'].invalid &&
-                  userForm.controls['contact'].dirty &&
-                  userForm.controls['contact'].touched
+                  (userForm.controls['contact'].dirty ||
+                    userForm.controls['contact'].touched)
                 "
                 class="p-error"
               >
                 Contact is Required
               </small>
             </div>
-            <div class="p-field col-12"></div>
+            <div class="p-field col-4">
+              <label for="role">Role</label>
+              <p-dropdown
+                [options]="roles"
+                formControlName="role"
+                placeholder="Select a Role"
+                optionLabel="label"
+                optionValue="value"
+                [showClear]="true"
+              ></p-dropdown>
+              <small
+                *ngIf="
+                  userForm.controls['role'].invalid &&
+                  (userForm.controls['role'].dirty ||
+                    userForm.controls['role'].touched)
+                "
+                class="p-error"
+              >
+                Role is Required
+              </small>
+            </div>
+            <div class="p-field col-4"></div>
             <div class="p-field col-4">
               <label for="street">Street</label>
               <input
@@ -221,7 +259,7 @@
               </small>
             </div>
             <div class="p-field col-4">
-              <label for="zip">zip</label>
+              <label for="zip">Zip</label>
               <input formControlName="zip" id="zip" type="text" pInputText />
               <small
                 *ngIf="
@@ -231,47 +269,35 @@
                 "
                 class="p-error"
               >
-                zip is Required
+                Zip is Required
+              </small>
+            </div>
+
+            <div class="p-field col-4">
+              <label for="image">Main Image</label>
+              <p-fileUpload
+                class="user-form-image"
+                accept="image/*"
+                maxFileSize="1000000"
+                (onSelect)="onImageUpload($event)"
+                [auto]="true"
+                chooseLabel="Browse"
+                previewWidth="150"
+              ></p-fileUpload>
+
+              <small
+                *ngIf="
+                  userForm.controls['profilePicture'].invalid &&
+                  (userForm.controls['profilePicture'].dirty ||
+                    userForm.controls['profilePicture'].touched)
+                "
+                class="p-error"
+              >
+                Profile Picture is Required
               </small>
             </div>
           </div>
         </form>
-        <!--         <form action="/uploadfile" enctype="multipart/form-data" method="POST">
-          <div class="p-filed p-col-12">
-            <div>
-              <label for="image">Main Image</label>
-            </div>
-            <input
-              type="file"
-              class="p-inputtext"
-              accept="image/*"
-              (change)="onImageUpload($event)"
-            />
-            <div *ngIf="imageDisplay" class="mt-3 ml-0">
-              <img
-                style="
-                  max-width: 200px;
-                  max-height: 200px;
-                  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
-                    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-                "
-                [src]="imageDisplay"
-              />
-              <div>
-                <p-button
-                  label="Upload"
-                  icon="pi pi-upload"
-                  iconPos="right"
-                  [style]="{
-                    width: '17%',
-                    color: 'white',
-                    backgroundColor: '#16A34B'
-                  }"
-                ></p-button>
-              </div>
-            </div>
-          </div>
-        </form> -->
       </div>
     </div>
   </p-card>

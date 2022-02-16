@@ -18,9 +18,11 @@
             "tsConfig": "apps/admin/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
-            "styles": ["apps/admin/src/styles.scss"],
+            "styles": [
+              "apps/admin/src/styles.scss",
+              "node_modules/intl-tel-input/build/css/intlTelInput.min.css"
+            ],
             "scripts": [
-              "apps/admin/src/assets/theme/md-dark-indigo/theme.css",
               "node_modules/quill/dist/quill.js",
               "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
             ]

@@ -47,8 +47,12 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { EditorModule } from 'primeng/editor';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { FileUploadModule } from 'primeng/fileupload';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { CurrencyConvertPipe } from './currency-convert.pipe';
+import { EnrollmentDetailComponent } from './pages/enrollment/enrollment-detail/enrollment-detail.component';
+import { EnrollmentListComponent } from './pages/enrollment/enrollment-list/enrollment-list.component';
+import { EnrollmentComponent } from './pages/enrollment/enrollment.component';
 
 const UX_MODULE = [
   CardModule,
@@ -65,6 +69,7 @@ const UX_MODULE = [
   EditorModule,
   InputSwitchModule,
   PanelMenuModule,
+  FileUploadModule,
 ];
 
 @NgModule({
@@ -86,6 +91,9 @@ const UX_MODULE = [
     FooterComponent,
     SideMenuComponent,
     AppConfigComponent,
+    EnrollmentDetailComponent,
+    EnrollmentListComponent,
+    EnrollmentComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
@@ -27,21 +28,23 @@ export class UserFormComponent implements OnInit {
   userForm: FormGroup;
   editMode = false;
   currentUserId: string;
+  pictureDisplay: string | ArrayBuffer | null;
 
   //Location Handling
   countries: Country[];
   states: State[];
   cities: City[];
+  roles = [
+    { label: 'Admin', value: 'admin' },
+    { label: 'Student', value: 'student' },
+    { label: 'Teacher', value: 'teacher' },
+  ];
 
   //Phone Contact Variables
   separateDialCode = false;
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
   PhoneNumberFormat = PhoneNumberFormat;
-  preferredCountries: CountryISO[] = [
-    CountryISO.UnitedStates,
-    CountryISO.UnitedKingdom,
-  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,7 +61,8 @@ export class UserFormComponent implements OnInit {
       email: ['', Validators.required],
       passwordHash: ['', Validators.required],
       contact: ['', Validators.required],
-      isAdmin: [[false, Validators.required]],
+      isAdmin: [[false]],
+      profilePicture: [''],
       street: ['', Validators.required],
       house: ['', Validators.required],
       city: ['', Validators.required],
@@ -104,6 +108,21 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
+    console.log(this.userForm.controls['contact'].value);
+
+    this.userForm.controls['city'].setValue(
+      this.userForm.controls['city'].value.name
+    );
+    this.userForm.controls['country'].setValue(
+      this.userForm.controls['country'].value.name
+    );
+    this.userForm.controls['state'].setValue(
+      this.userForm.controls['state'].value.name
+    );
+    this.userForm.controls['contact'].setValue(
+      this.userForm.controls['contact'].value.internationalNumber
+    );
+
     const formData = new FormData();
 
     Object.keys(this.userForm.controls).map((key) => {
@@ -115,8 +134,14 @@ export class UserFormComponent implements OnInit {
     } else {
       this.userAdd(formData);
     }
+  }
 
-    this.userForm.reset();
+  onImageUpload(event: any) {
+    const file = event.currentFiles[0];
+    if (file) {
+      this.userForm.patchValue({ profilePicture: file });
+      this.userForm!.get('profilePicture').updateValueAndValidity();
+    }
   }
 
   private userAdd(formData: FormData) {
@@ -124,8 +149,8 @@ export class UserFormComponent implements OnInit {
       (res: User) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'user Added Successfully',
-          detail: `user:${res.name}`,
+          summary: 'User Added Successfully',
+          detail: ``,
         });
         timer(2000)
           .toPromise()

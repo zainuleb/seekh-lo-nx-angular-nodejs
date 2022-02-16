@@ -1,6 +1,7 @@
 export class User {
   name?: string;
   email?: string;
+  image?: string | ArrayBuffer | null;
   passwordHash?: string;
   contact?: string;
   isAdmin?: boolean;

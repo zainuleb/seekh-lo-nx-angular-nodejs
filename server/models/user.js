@@ -16,7 +16,11 @@ const userSchema = new mongoose.Schema({
   },
   contact: {
     type: String,
-    required: [true, 'Please Enter Your Phone'],
+    default: '',
+  },
+  profilePicture: {
+    type: String,
+    default: '',
   },
   isAdmin: {
     type: Boolean,

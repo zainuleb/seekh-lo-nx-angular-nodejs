@@ -25,7 +25,7 @@
           [rowHover]="true"
           [rows]="10"
           [showCurrentPageReport]="true"
-          [rowsPerPageOptions]="[10, 5, 15]"
+          [rowsPerPageOptions]="[5, 10]"
           [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
           [filterDelay]="0"
@@ -39,20 +39,21 @@
           <ng-template pTemplate="header">
             <tr>
               <th>Id</th>
-              <th pSortableColumn="title">
+              <th pSortableColumn="name">
                 <div class="flex justify-content-between p-ai-center">
                   Name
                   <div>
-                    <p-sortIcon field="title"></p-sortIcon>
+                    <p-sortIcon field="name"></p-sortIcon>
                     <p-columnFilter
                       type="text"
-                      field="title"
+                      field="name"
                       display="menu"
                       class="p-ml-auto"
                     ></p-columnFilter>
                   </div>
                 </div>
               </th>
+              <th>Image</th>
               <th>Email</th>
               <th>Contact</th>
               <th pSortableColumn="role">
@@ -70,17 +71,25 @@
                 </div>
               </th>
               <th>Address</th>
-              <th>Zip</th>
+
               <th></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-user>
             <tr>
               <td>
-                {{ user.id | slice: 5:10 }}
+                {{ user.id | slice: 5:9 }}
               </td>
+
               <td>
                 {{ user.name }}
+              </td>
+              <td>
+                <img
+                  src="{{ user.profilePicture }}"
+                  alt=" {{ user.name }}"
+                  width="100px"
+                />
               </td>
               <td>
                 {{ user.email }}
@@ -94,9 +103,7 @@
               <td>
                 {{ user.country }}
               </td>
-              <td>
-                {{ user.zip }}
-              </td>
+
               <td>
                 <button
                   (click)="deleteUser(user._id)"
